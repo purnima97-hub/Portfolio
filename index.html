@@ -4,12 +4,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- link to fontawesome for inserting social media icons -->
+    <title>Purnima Bisht - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --accent: #2ecc71;
+            --accent-glow: rgba(46, 204, 113, 0.4);
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 12% 5%;
+            background: radial-gradient(circle at 75% 30%, var(--accent-glow) 0%, transparent 30%);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 5rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 50px var(--accent-glow);
+            animation: float 3s ease-in-out infinite;
+            filter: grayscale(0.2) contrast(1.1);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent) 30%, #ffffff 70%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--accent), #27ae60);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 5%;
+            background: var(--darker-bg);
+        }
+
+        .skills h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h1 {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        /* PESE Assignments Section */
+        .assignments {
+            padding: 5rem 5%;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--accent), #27ae60);
+            border-radius: 2px;
+        }
+
+        .assignment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .assignment-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .assignment-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(46, 204, 113, 0.2);
+            border-color: var(--accent);
+        }
+
+        .assignment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .assignment-number {
+            background: linear-gradient(45deg, var(--accent), #27ae60);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .assignment-title {
+            font-size: 1.8rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .assignment-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .profile-img {
+                width: 280px;
+                height: 280px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                padding-left: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .assignment-item {
+                padding: 2rem;
+            }
+
+            .assignment-title {
+                font-size: 1.4rem;
+            }
+
+            .assignment-description {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .assignment-item {
+                padding: 1.5rem;
+            }
+
+            .assignment-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .assignment-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .assignment-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -19,7 +416,7 @@
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#assignments">Assignments</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -29,7 +426,7 @@
         <div class="hero-content">
             <h1>Purnima Bisht</h1>
             <p>A learner passionate about technology and innovation, focused on developing skills in coding, problem-solving, and building a strong foundation for future opportunities.</p>
-            <p class="highlight">Pursuing B.Tech in Computer Science at Graphic Era Hill University | Exploring technology, coding, and innovation."</p>
+            <p class="highlight">Pursuing B.Tech in Computer Science at Graphic Era Hill University | Exploring technology, coding, and innovation.</p>
             <a href="#contact" class="cta-button">Let's Connect</a>
         </div>
         <div class="hero-image">
@@ -56,18 +453,171 @@
         </div>
     </section>
 
+    <!-- PESE Assignments Section -->
+    <section id="assignments" class="assignments">
+        <h2 class="section-title">PESE Assignments</h2>
+        <div class="assignment-container">
+            
+            <!-- Assignment 1 -->
+            <div class="assignment-item">
+                <div class="assignment-header">
+                    <div class="assignment-number">1</div>
+                    <h3 class="assignment-title">SWOC Analysis Learning Video</h3>
+                </div>
+                <p class="assignment-description">
+                    Comprehensive analysis of Strengths, Weaknesses, Opportunities, and Challenges framework
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/9fbZsBTd6bs" 
+                        title="SWOC Analysis Learning Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Assignment 2 -->
+            <div class="assignment-item">
+                <div class="assignment-header">
+                    <div class="assignment-number">2</div>
+                    <h3 class="assignment-title">Self Introduction</h3>
+                </div>
+                <p class="assignment-description">
+                    Professional self-introduction showcasing communication skills and confidence
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/UsKWgBrybyU?si=DsucWiIKwRIMRpjp" 
+                        title="Self Introduction" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Assignment 3 -->
+            <div class="assignment-item">
+                <div class="assignment-header">
+                    <div class="assignment-number">3</div>
+                    <h3 class="assignment-title">Presentation</h3>
+                </div>
+                <p class="assignment-description">
+                    Delivering an effective presentation with clarity and engagement
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/F3AKcfBm3go?si=SCrI_ykUC5vJDUJS" 
+                        title="Presentation" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Assignment 4 -->
+            <div class="assignment-item">
+                <div class="assignment-header">
+                    <div class="assignment-number">4</div>
+                    <h3 class="assignment-title">JAM Speech</h3>
+                </div>
+                <p class="assignment-description">
+                    Just A Minute speech demonstrating spontaneous speaking abilities
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/1mWtyG4LPn4?si=1SwtEGnLVR6Mve32" 
+                        title="JAM Speech" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Assignment 5 -->
+            <div class="assignment-item">
+                <div class="assignment-header">
+                    <div class="assignment-number">5</div>
+                    <h3 class="assignment-title">Group Roleplay on Art of Effective Conversation</h3>
+                </div>
+                <p class="assignment-description">
+                    Collaborative roleplay demonstrating interpersonal communication and active listening skills
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/7bOuTnUgi_I?si=8Ug1AstYEEG_ui9c" 
+                        title="Group Roleplay on Art of Effective Conversation" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="social-links">
             <a href="https://github.com/purnima97-hub" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/purnima9.7?utm_source=qr&igsh=MWJxY2JiYjVyZHZ1bg==" target="_blank"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/purnima-bisht-b41129323?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/purnima9.7?utm_source=qr&igsh=MWJxY2JiYjVyZHZ1bg==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/purnima-bisht-b41129323?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://wa.me/qr/Z7CXXRS6WCGKL1" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
     </footer>
 
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute("href"));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        const assignmentItems = document.querySelectorAll('.assignment-item');
+        assignmentItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(item);
+        });
+    </script>
 </body>
 
 </html>
